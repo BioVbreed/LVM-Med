@@ -1,9 +1,3 @@
-# Copyright (c) Meta Platforms, Inc. and affiliates.
-# All rights reserved.
-
-# This source code is licensed under the license found in the
-# LICENSE file in the root directory of this source tree.
-
 import torch
 
 from functools import partial
@@ -100,8 +94,10 @@ def _build_sam(
         pixel_std=[58.395, 57.12, 57.375],
     )
     sam.eval()
+    device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
+
     if checkpoint is not None:
         with open(checkpoint, "rb") as f:
-            state_dict = torch.load(f)
+            state_dict = torch.load(f, map_location=device)
         sam.load_state_dict(state_dict)
     return sam

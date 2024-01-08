@@ -1,4 +1,4 @@
-## LVM-Med: Learning Large-Scale Self-Supervised Vision Models for Medical Imaging via Second-order Graph Matching
+## LVM-Med: Learning Large-Scale Self-Supervised Vision Models for Medical Imaging via Second-order Graph Matching (Neurips 2023).
 We release [LVM-Med](https://arxiv.org/abs/2306.11925)'s pre-trained models and demonstrate downstream tasks on 2D-3D segmentations, linear/fully finetuning image classification, and object detection. 
 
 LVM-Med was trained with ~ 1.3 million medical images collected from 55 datasets using a second-order graph matching formulation unifying
@@ -27,10 +27,12 @@ current contrastive and instance-based SSL.
 * [License](#license)
 
 ## News
+- :mega: **14/12/2023**: The LVM-Med training algorithm is ready to be released! Please send us an email to request!
 - :pencil2: If you want to have other architecture, send us a request by email or create an Issue. If the requests are enough, we will train them.
-- :construction: Cominng soon: [ConvNext](https://arxiv.org/abs/2201.03545) architecture trained by LVM-Med.
+- :construction: Coming soon: [ConvNext](https://arxiv.org/abs/2201.03545) architecture trained by LVM-Med.
 - :construction: Coming soon: ViT architectures for end-to-end segmentation with better performance reported in the paper.
-- **26/07/2023**: We release ViT architectures initialized from LVM-Med and further training on the LIVECell dataset with 1.6 million high-quality cells. See at this [table](#further-training-lvm-med-on-large-dataset). 
+- **31/07/2023**: Release ONNX support for LVM-Med ResNet50 and LVM-Med ViT as backbones in [`onnx_model`](/onnx_model/) folder.
+- **26/07/2023**: We release ViT architectures (**ViT-B** and **ViT-H**) initialized from LVM-Med and further training on the LIVECell dataset with 1.6 million high-quality cells. See at this [table](#further-training-lvm-med-on-large-dataset). 
 - **25/06/2023**: We release two pre-trained models of LVM-Med: ResNet-50 and ViT-B. Providing scripts for downstream tasks.
 
 ## LVM-Med Pretrained Models
@@ -83,6 +85,13 @@ We release some further pre-trained weight on other large datasets as mentioned 
     <td>86.0M</td>
     <td> <a href="https://www.nature.com/articles/s41592-021-01249-6">LIVECell</a> </td>
     <td> <a href="https://drive.google.com/file/d/1SxaGXQ4FMbG8pS2zzwTIXXgxF4GdwyEU/view?usp=sharing">backbone</a> </td>
+    <td> <a href="https://github.com/duyhominhnguyen/LVM-Med/blob/main/further_training_lvm_med/README.md">Link</a></td>
+  </tr>
+  <tr>
+    <td>ViT-H</td>
+    <td>632M</td>
+    <td> <a href="https://www.nature.com/articles/s41592-021-01249-6">LIVECell</a> </td>
+    <td> <a href="https://drive.google.com/file/d/14IhoyBXI9eP9V2xeOV2-6LlNICKjzBaJ/view?usp=sharing">backbone</a> </td>
     <td> <a href="https://github.com/duyhominhnguyen/LVM-Med/blob/main/further_training_lvm_med/README.md">Link</a></td>
   </tr>
 </table>
@@ -152,7 +161,7 @@ Currently support for `Kvasir`, `BUID`, `FGADR`, `MMWHS_MR_Heart` and `MMWHS_CT_
 ```bash
 python train_segmentation.py -c ./dataloader/yaml_data/buid_endtoend_R50.yml
 ```
-Chaning name of dataset in ``.yml`` configs in [```./dataloader/yaml_data/```](./dataloader/yaml_data/) for other experiments.
+Changing name of dataset in ``.yml`` configs in [```./dataloader/yaml_data/```](./dataloader/yaml_data/) for other experiments.
 
 **Note**: to apply segmentation models (2D or 3D) using ResNet-50, we suggest normalizing gradient for stable training phases by set:
 
@@ -186,7 +195,7 @@ For the end-to-end version using SAM's ViT, we will soon release a better versio
 [//]: # (```)
 
 ### 2. Prompt-based Segmentation with ViT-B
-**a. Prompt-based segmentation with fined-tune decoder of SAM ([MedSAM](https://github.com/bowang-lab/MedSAM)).**
+**a. Prompt-based segmentation with fine-tuned decoder of SAM ([MedSAM](https://github.com/bowang-lab/MedSAM)).**
 
 We run the MedSAM baseline to compare performance by:
 #### Train
@@ -268,7 +277,7 @@ Please cite this paper if it helps your research:
 ```
 
 ## Related Work
-We use and modify codes from [SAM](https://github.com/facebookresearch/segment-anything) and [MedSAM](https://github.com/bowang-lab/MedSAM) for prompt-based segmentation settings. A part of LVM-Med algorithm adopt data transformations from [Vicregl](https://github.com/facebookresearch/VICRegL), [Deepcluster-v2](https://github.com/facebookresearch/swav?utm_source=catalyzex.com). We also utilize [vissl](https://github.com/facebookresearch/vissl) framework to train 2D self-superived methods in our collected data. Thank the authors for their great work!
+We use and modify codes from [SAM](https://github.com/facebookresearch/segment-anything) and [MedSAM](https://github.com/bowang-lab/MedSAM) for prompt-based segmentation settings. A part of LVM-Med algorithm adopt data transformations from [Vicregl](https://github.com/facebookresearch/VICRegL), [Deepcluster-v2](https://github.com/facebookresearch/swav?utm_source=catalyzex.com). We also utilize [vissl](https://github.com/facebookresearch/vissl) framework to train 2D self-supervised methods in our collected data. Thank the authors for their great work!
 
 ## License
 Licensed under the [CC BY-NC-ND 2.0](https://creativecommons.org/licenses/by-nc-nd/2.0/) (**Attribution-NonCommercial-NoDerivs 2.0 Generic**). The code is released for academic research use only. For commercial use, please contact [Ho_Minh_Duy.Nguyen@dfki.de](Ho_Minh_Duy.Nguyen@dfki.de)
